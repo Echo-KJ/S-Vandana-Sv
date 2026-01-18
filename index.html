@@ -1,0 +1,2186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Glorys GS — Bridal Makeup & Hair Styling by S Vandana. Premium on-location bridal glam across Telangana & Andhra Pradesh."
+    />
+    <meta name="theme-color" content="#fcfaf7" />
+    <title>Glorys GS | Bridal Makeup & Hair Stylist</title>
+    <link rel="icon" href="https://kj-arts.vercel.app/assets/images/sig.png" type="image/png" />
+
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <style>
+      /* =========================================================
+        GLORYS GS — Single-file luxury bridal site (responsive)
+        - Mobile drawer nav + overlay
+        - Scroll reveal animations
+        - Portfolio lightbox modal + keyboard support
+        - Smooth scrolling w/ header offset
+        - Reduced motion support
+      ========================================================= */
+
+      :root {
+        /* Palette */
+        --bg: #fcfaf7;
+        --bg-2: #f8f3ee;
+        --card: #ffffff;
+        --text: #161616;
+        --text-2: #3b3b3b;
+        --muted: #6f6f6f;
+
+        --accent: #d4b8aa;
+        --accent-2: #ead8cf;
+        --accent-3: #caa08b;
+
+        --border: rgba(22, 22, 22, 0.09);
+        --shadow: 0 20px 60px rgba(22, 22, 22, 0.08);
+        --shadow-soft: 0 12px 35px rgba(22, 22, 22, 0.06);
+
+        /* Layout */
+        --container: 1180px;
+        --radius: 18px;
+
+        /* Motion */
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        --t: 220ms var(--ease);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial,
+          sans-serif;
+        color: var(--text);
+        background: radial-gradient(
+            1200px 600px at 10% -10%,
+            rgba(212, 184, 170, 0.18),
+            transparent 60%
+          ),
+          radial-gradient(
+            900px 500px at 100% 0%,
+            rgba(234, 216, 207, 0.22),
+            transparent 55%
+          ),
+          var(--bg);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      /* Better focus styles */
+      :focus-visible {
+        outline: 3px solid rgba(212, 184, 170, 0.75);
+        outline-offset: 3px;
+        border-radius: 10px;
+      }
+
+      /* Reduced motion support */
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        * {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+
+      /* Container */
+      .container {
+        width: min(var(--container), calc(100% - 2.2rem));
+        margin: 0 auto;
+      }
+
+      /* Typography */
+      .serif,
+      h1,
+      h2,
+      h3,
+      .logo {
+        font-family: "Cormorant Garamond", serif;
+        letter-spacing: 0.4px;
+      }
+
+      h1 {
+        font-weight: 400;
+        line-height: 1.05;
+        font-size: clamp(2.6rem, 6vw, 4.8rem);
+        margin: 0 0 1.25rem;
+      }
+
+      h2 {
+        font-weight: 400;
+        font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+        margin: 0;
+      }
+
+      h3 {
+        margin: 0 0 0.6rem;
+        font-weight: 500;
+        font-size: 1.45rem;
+      }
+
+      p {
+        margin: 0 0 1.1rem;
+        color: var(--text-2);
+        max-width: 70ch;
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      /* Sections */
+      section {
+        padding: clamp(3.8rem, 6vw, 6rem) 0;
+      }
+
+      .section-head {
+        text-align: center;
+        margin-bottom: clamp(2.2rem, 4vw, 3rem);
+      }
+
+      .section-head .kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-size: 0.9rem;
+        color: var(--muted);
+        margin-bottom: 0.55rem;
+      }
+
+      .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: var(--accent-3);
+        box-shadow: 0 0 0 6px rgba(212, 184, 170, 0.22);
+      }
+
+      .section-head .line {
+        margin: 1rem auto 0;
+        width: 66px;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--accent-3),
+          transparent
+        );
+        opacity: 0.9;
+      }
+
+      /* Header */
+      header {
+        position: fixed;
+        inset: 0 0 auto 0;
+        z-index: 50;
+        padding: 1rem 0;
+        transition: background-color var(--t), box-shadow var(--t),
+          transform var(--t);
+        background: transparent;
+      }
+
+      header.scrolled {
+        background: rgba(252, 250, 247, 0.86);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 8px 30px rgba(22, 22, 22, 0.06);
+      }
+
+      .header-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .logo {
+        font-size: 1.6rem;
+        font-weight: 500;
+        letter-spacing: 0.8px;
+        display: inline-flex;
+        align-items: baseline;
+        gap: 0.5rem;
+      }
+
+      .logo span {
+        font-family: "Inter", sans-serif;
+        font-size: 0.8rem;
+        color: var(--muted);
+        letter-spacing: 0.3px;
+      }
+
+      nav ul {
+        display: flex;
+        gap: 1.8rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      nav a {
+        font-size: 0.95rem;
+        color: var(--text);
+        position: relative;
+        padding: 0.2rem 0;
+        transition: color var(--t);
+      }
+
+      nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -0.25rem;
+        width: 0%;
+        height: 1px;
+        background: var(--accent-3);
+        transition: width var(--t);
+        opacity: 0.9;
+      }
+
+      nav a:hover::after,
+      nav a[aria-current="true"]::after {
+        width: 100%;
+      }
+
+      .header-cta {
+        display: flex;
+        align-items: center;
+        gap: 0.9rem;
+      }
+
+      .icon-link {
+        width: 42px;
+        height: 42px;
+        display: grid;
+        place-items: center;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.6);
+        transition: transform var(--t), border-color var(--t),
+          box-shadow var(--t);
+      }
+
+      .icon-link:hover {
+        transform: translateY(-2px);
+        border-color: rgba(202, 160, 139, 0.6);
+        box-shadow: 0 10px 22px rgba(22, 22, 22, 0.08);
+      }
+
+      .phone {
+        font-weight: 500;
+        font-size: 0.95rem;
+        color: var(--text);
+        padding: 0.55rem 0.8rem;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.65);
+        transition: transform var(--t), border-color var(--t);
+        white-space: nowrap;
+      }
+
+      .phone:hover {
+        transform: translateY(-2px);
+        border-color: rgba(202, 160, 139, 0.6);
+      }
+
+      .hamburger {
+        display: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.65);
+        cursor: pointer;
+        transition: transform var(--t), border-color var(--t);
+      }
+
+      .hamburger:hover {
+        transform: translateY(-2px);
+        border-color: rgba(202, 160, 139, 0.6);
+      }
+
+      /* Mobile drawer */
+      .drawer-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(10, 10, 10, 0.5);
+        backdrop-filter: blur(6px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 260ms var(--ease);
+        z-index: 60;
+      }
+
+      .drawer {
+        position: fixed;
+        inset: 0 0 0 auto;
+        width: min(88vw, 380px);
+        background: var(--bg);
+        transform: translateX(110%);
+        transition: transform 320ms var(--ease);
+        z-index: 70;
+        box-shadow: -20px 0 60px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        padding: 1.2rem;
+      }
+
+      .drawer header {
+        position: static;
+        background: transparent !important;
+        box-shadow: none !important;
+        padding: 0;
+      }
+
+      .drawer-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.4rem 0.2rem 1rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .drawer-close {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.7);
+        cursor: pointer;
+      }
+
+      .drawer nav {
+        padding: 1.2rem 0.2rem;
+      }
+
+      .drawer ul {
+        display: grid;
+        gap: 0.5rem;
+      }
+
+      .drawer a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.9rem 0.8rem;
+        border-radius: 14px;
+        border: 1px solid transparent;
+        background: rgba(255, 255, 255, 0.55);
+        transition: transform var(--t), border-color var(--t);
+      }
+
+      .drawer a:hover {
+        transform: translateY(-2px);
+        border-color: rgba(202, 160, 139, 0.55);
+      }
+
+      .drawer .drawer-contacts {
+        margin-top: auto;
+        border-top: 1px solid var(--border);
+        padding: 1rem 0.2rem 0.2rem;
+        display: grid;
+        gap: 0.6rem;
+      }
+
+      .drawer .drawer-contacts a {
+        justify-content: flex-start;
+        gap: 0.7rem;
+      }
+
+      body.drawer-open .drawer-overlay {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      body.drawer-open .drawer {
+        transform: translateX(0%);
+      }
+
+      body.drawer-open {
+        overflow: hidden;
+        touch-action: none;
+      }
+
+      /* Hero */
+      .hero {
+        min-height: 100vh;
+        display: grid;
+        align-items: center;
+        padding-top: 6.2rem; /* space for fixed header */
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        background:
+          radial-gradient(900px 500px at 20% 20%, rgba(212,184,170,0.22), transparent 60%),
+          radial-gradient(900px 500px at 80% 0%, rgba(234,216,207,0.25), transparent 60%),
+          linear-gradient(180deg, rgba(10,10,10,0.18), rgba(10,10,10,0.45));
+      }
+
+      .hero-media {
+        position: absolute;
+        inset: 0;
+        z-index: -3;
+        background-image: url("https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=2200&q=80");
+        background-size: cover;
+        background-position: center 30%;
+        filter: saturate(0.98) contrast(1.02);
+        transform: scale(1.04);
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: clamp(1.6rem, 4vw, 3rem);
+        align-items: center;
+      }
+
+      .hero-card {
+        color: white;
+        max-width: 62ch;
+      }
+
+      .hero-card p {
+        color: rgba(255, 255, 255, 0.85);
+        font-size: clamp(1rem, 2.2vw, 1.2rem);
+        margin-bottom: 1.6rem;
+      }
+
+      .hero-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+        margin: 1rem 0 1.8rem;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.45rem 0.75rem;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        background: rgba(255, 255, 255, 0.08);
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.9rem;
+        backdrop-filter: blur(10px);
+      }
+
+      .badge i {
+        opacity: 0.9;
+      }
+
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        margin-top: 1.4rem;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.55rem;
+        padding: 0.95rem 1.2rem;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        font-weight: 600;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: transform var(--t), box-shadow var(--t), border-color var(--t),
+          background-color var(--t), color var(--t);
+        user-select: none;
+        white-space: nowrap;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--accent), var(--accent-3));
+        color: #161616;
+        box-shadow: 0 14px 40px rgba(212, 184, 170, 0.25);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 52px rgba(212, 184, 170, 0.32);
+      }
+
+      .btn-ghost {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.22);
+        color: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(10px);
+      }
+
+      .btn-ghost:hover {
+        transform: translateY(-2px);
+        border-color: rgba(255, 255, 255, 0.35);
+      }
+
+      /* Hero side card */
+      .hero-side {
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(14px);
+        color: rgba(255, 255, 255, 0.92);
+        padding: 1.3rem;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.28);
+      }
+
+      .hero-side h3 {
+        margin: 0 0 0.6rem;
+        font-weight: 600;
+      }
+
+      .hero-side p {
+        color: rgba(255, 255, 255, 0.8);
+        margin: 0 0 1rem;
+      }
+
+      .hero-side .mini {
+        display: grid;
+        gap: 0.7rem;
+      }
+
+      .mini-row {
+        display: flex;
+        gap: 0.8rem;
+        align-items: flex-start;
+        padding: 0.8rem;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+      }
+
+      .mini-row i {
+        margin-top: 0.15rem;
+        opacity: 0.9;
+      }
+
+      /* Services */
+      .services {
+        background: linear-gradient(
+          180deg,
+          rgba(248, 243, 238, 0.75),
+          rgba(252, 250, 247, 0.8)
+        );
+      }
+
+      .grid {
+        display: grid;
+        gap: 1.2rem;
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(12, 1fr);
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .service-card {
+        padding: 1.4rem;
+        transition: transform var(--t), box-shadow var(--t), border-color var(--t);
+      }
+
+      .service-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow);
+        border-color: rgba(202, 160, 139, 0.35);
+      }
+
+      .service-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-top: 0.9rem;
+        padding-top: 0.9rem;
+        border-top: 1px dashed rgba(22, 22, 22, 0.12);
+      }
+
+      .price {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.15rem;
+        color: var(--text);
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.35rem 0.6rem;
+        border-radius: 999px;
+        border: 1px solid rgba(212, 184, 170, 0.55);
+        background: rgba(212, 184, 170, 0.12);
+        font-size: 0.85rem;
+        color: var(--text-2);
+      }
+
+      .col-4 {
+        grid-column: span 4;
+      }
+      .col-6 {
+        grid-column: span 6;
+      }
+
+/* Portfolio grid */
+.portfolio-grid {
+  grid-template-columns: repeat(12, 1fr);
+}
+
+/* Card */
+.work {
+  grid-column: span 3;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: #fff;
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  aspect-ratio: 4 / 5;
+  transition: transform var(--t), box-shadow var(--t), border-color var(--t);
+}
+
+.work:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+  border-color: rgba(202, 160, 139, 0.35);
+}
+
+/* Image */
+.work img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.02);
+  transition: transform 600ms var(--ease);
+}
+
+.work:hover img {
+  transform: scale(1.06);
+}
+
+/* Gradient overlay */
+.work::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 45%;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(10, 10, 10, 0.55)
+  );
+  opacity: 0;
+  transition: opacity var(--t);
+  pointer-events: none;
+}
+
+/* Caption */
+.work .caption {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity var(--t), transform var(--t);
+  z-index: 2;
+}
+
+/* Reveal on hover (desktop) + tap (mobile) + keyboard */
+.work:hover::after,
+.work:focus-within::after {
+  opacity: 1;
+}
+
+.work:hover .caption,
+.work:focus-within .caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Caption secondary text */
+.caption .small {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+      /* Lightbox modal */
+      .modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.88);
+        display: none;
+        z-index: 100;
+        padding: 1.2rem;
+      }
+
+      .modal.active {
+        display: grid;
+        place-items: center;
+      }
+
+      .modal-inner {
+        width: min(980px, 100%);
+        position: relative;
+      }
+
+      .modal-img {
+        width: 100%;
+        max-height: 82vh;
+        object-fit: contain;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .modal-close,
+      .modal-prev,
+      .modal-next {
+        position: absolute;
+        top: 0.75rem;
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: rgba(255, 255, 255, 0.08);
+        color: white;
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        transition: transform var(--t), border-color var(--t);
+        backdrop-filter: blur(10px);
+      }
+
+      .modal-close:hover,
+      .modal-prev:hover,
+      .modal-next:hover {
+        transform: translateY(-2px);
+        border-color: rgba(255, 255, 255, 0.32);
+      }
+
+      .modal-close {
+        right: 0.75rem;
+      }
+
+      .modal-prev,
+      .modal-next {
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .modal-prev:hover,
+      .modal-next:hover {
+        transform: translateY(calc(-50% - 2px));
+      }
+
+      .modal-prev {
+        left: -0.2rem;
+      }
+
+      .modal-next {
+        right: -0.2rem;
+      }
+
+      .modal-caption {
+        color: rgba(255, 255, 255, 0.85);
+        margin-top: 0.9rem;
+        text-align: center;
+        font-size: 0.95rem;
+      }
+
+      /* Testimonials */
+      .testimonials {
+        background: linear-gradient(
+          180deg,
+          rgba(248, 243, 238, 0.75),
+          rgba(252, 250, 247, 0.8)
+        );
+      }
+
+      .testimonials-grid {
+        grid-template-columns: repeat(12, 1fr);
+      }
+
+      .quote {
+        grid-column: span 4;
+        padding: 1.5rem;
+        position: relative;
+      }
+
+      .quote::before {
+        content: "“";
+        position: absolute;
+        left: 1.2rem;
+        top: 0.3rem;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 4.6rem;
+        color: rgba(212, 184, 170, 0.35);
+        line-height: 1;
+      }
+
+      .quote p {
+        margin-bottom: 1rem;
+      }
+
+      .quote .who {
+        display: grid;
+        gap: 0.2rem;
+      }
+
+      .who strong {
+        font-weight: 600;
+      }
+
+      /* About */
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: clamp(1.2rem, 4vw, 3rem);
+        align-items: center;
+      }
+
+      .about-photo {
+        border-radius: var(--radius);
+        overflow: hidden;
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow-soft);
+        aspect-ratio: 4 / 5;
+      }
+
+      .about-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .about-card {
+        padding: 1.6rem;
+      }
+
+      .areas {
+        margin-top: 1.2rem;
+        padding-top: 1.2rem;
+        border-top: 1px solid var(--border);
+        display: grid;
+        gap: 0.5rem;
+      }
+
+      .areas .pill-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .pill {
+        padding: 0.4rem 0.7rem;
+        border-radius: 999px;
+        border: 1px solid rgba(22, 22, 22, 0.1);
+        background: rgba(212, 184, 170, 0.12);
+        font-size: 0.88rem;
+        color: var(--text-2);
+      }
+
+      /* Contact */
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(1.2rem, 4vw, 3rem);
+        align-items: start;
+      }
+
+      .contact-card {
+        padding: 1.6rem;
+      }
+
+      .contact-list {
+        display: grid;
+        gap: 0.75rem;
+        margin: 1.1rem 0 1.4rem;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.85rem;
+        border-radius: 14px;
+        border: 1px solid rgba(22, 22, 22, 0.09);
+        background: rgba(255, 255, 255, 0.6);
+        transition: transform var(--t), border-color var(--t);
+      }
+
+      .contact-item:hover {
+        transform: translateY(-2px);
+        border-color: rgba(202, 160, 139, 0.35);
+      }
+
+      .contact-item i {
+        width: 20px;
+        color: var(--accent-3);
+      }
+
+      form {
+        display: grid;
+        gap: 0.9rem;
+      }
+
+      label {
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+
+      .field {
+        display: grid;
+        gap: 0.35rem;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 0.95rem 1rem;
+        border-radius: 14px;
+        border: 1px solid rgba(22, 22, 22, 0.12);
+        background: rgba(255, 255, 255, 0.75);
+        font: inherit;
+        transition: border-color var(--t), transform var(--t), box-shadow var(--t);
+      }
+
+      input:focus,
+      textarea:focus {
+        outline: none;
+        border-color: rgba(202, 160, 139, 0.6);
+        box-shadow: 0 0 0 6px rgba(212, 184, 170, 0.18);
+      }
+
+      textarea {
+        min-height: 150px;
+        resize: vertical;
+      }
+
+      .hint {
+        font-size: 0.86rem;
+        color: var(--muted);
+      }
+
+      .success {
+        display: none;
+        border-left: 4px solid #2e7d32;
+        background: rgba(46, 125, 50, 0.08);
+        padding: 1rem;
+        border-radius: 14px;
+        margin-top: 0.6rem;
+      }
+
+      /* Footer */
+      footer {
+        padding: 3.4rem 0;
+        border-top: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.35);
+      }
+
+      .footer-grid {
+        display: grid;
+        gap: 1rem;
+        justify-items: center;
+        text-align: center;
+      }
+
+      .footer-social {
+        display: flex;
+        gap: 0.75rem;
+        justify-content: center;
+      }
+
+      .copyright {
+        font-size: 0.92rem;
+        color: var(--muted);
+      }
+
+      /* Scroll reveal */
+      .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+        transition: opacity 700ms var(--ease), transform 700ms var(--ease);
+      }
+
+      .reveal.in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Back-to-top */
+      .to-top {
+        position: fixed;
+        right: 1rem;
+        bottom: 1rem;
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        border: 1px solid rgba(22, 22, 22, 0.12);
+        background: rgba(255, 255, 255, 0.75);
+        box-shadow: var(--shadow-soft);
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        opacity: 0;
+        transform: translateY(10px);
+        pointer-events: none;
+        transition: opacity var(--t), transform var(--t);
+        z-index: 40;
+      }
+
+      .to-top.show {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+      ---------------------------------
+      .service-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-bottom: 14px;
+}
+
+
+      /* =========================================================
+        Responsive rules
+      ========================================================= */
+      @media (max-width: 1024px) {
+        nav {
+          display: none;
+        }
+        .hamburger {
+          display: grid;
+          place-items: center;
+        }
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero-side {
+          max-width: 640px;
+        }
+        .col-4 {
+          grid-column: span 6;
+        }
+        .work {
+          grid-column: span 4;
+        }
+        .quote {
+          grid-column: span 6;
+        }
+        .about-grid {
+          grid-template-columns: 1fr;
+        }
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .header-cta .phone {
+          display: none;
+        }
+        section {
+          padding: 3.4rem 0;
+        }
+        .col-4 {
+          grid-column: span 12;
+        }
+        .work {
+          grid-column: span 12;
+        }
+        .quote {
+          grid-column: span 12;
+        }
+        .modal-prev,
+        .modal-next {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header id="header">
+      <div class="container header-row">
+        <a href="#home" class="logo" aria-label="Go to Home">
+          Glorys GS <span>Bridal Glam</span>
+        </a>
+
+        <nav aria-label="Primary navigation">
+          <ul id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-cta">
+          <a
+            class="icon-link"
+            href="https://instagram.com/glorys_gs"
+            target="_blank"
+            rel="noopener"
+            aria-label="Instagram"
+          >
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a class="phone" href="tel:+919347738249" aria-label="Call phone number">
+            +91 9347738249
+          </a>
+
+          <button class="hamburger" id="openDrawer" aria-label="Open menu">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile drawer -->
+    <div class="drawer-overlay" id="drawerOverlay" aria-hidden="true"></div>
+    <aside class="drawer" id="drawer" aria-label="Mobile menu" aria-hidden="true">
+      <div class="drawer-top">
+        <div class="logo serif" style="font-size: 1.4rem">Glorys GS</div>
+        <button class="drawer-close" id="closeDrawer" aria-label="Close menu">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <nav aria-label="Mobile navigation">
+        <ul style="list-style:none; padding:0; margin:0;">
+          <li><a class="drawer-link" href="#home">Home <i class="fa-solid fa-arrow-right"></i></a></li>
+          <li><a class="drawer-link" href="#services">Services <i class="fa-solid fa-arrow-right"></i></a></li>
+          <li><a class="drawer-link" href="#portfolio">Portfolio <i class="fa-solid fa-arrow-right"></i></a></li>
+          <li><a class="drawer-link" href="#testimonials">Testimonials <i class="fa-solid fa-arrow-right"></i></a></li>
+          <li><a class="drawer-link" href="#about">About <i class="fa-solid fa-arrow-right"></i></a></li>
+          <li><a class="drawer-link" href="#contact">Contact <i class="fa-solid fa-arrow-right"></i></a></li>
+        </ul>
+      </nav>
+
+      <div class="drawer-contacts">
+        <a href="https://instagram.com/glorys_gs" target="_blank" rel="noopener">
+          <i class="fa-brands fa-instagram"></i> @glorys_gs
+        </a>
+        <a href="tel:+919347738249">
+          <i class="fa-solid fa-phone"></i> +91 9347738249
+        </a>
+        <a href="https://wa.me/919347738249" target="_blank" rel="noopener">
+          <i class="fa-brands fa-whatsapp"></i> WhatsApp
+        </a>
+      </div>
+    </aside>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+      <div class="hero-media" aria-hidden="true"></div>
+      <div class="hero-bg" aria-hidden="true"></div>
+
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-card reveal">
+            <div class="hero-badges">
+              <span class="badge"><i class="fa-solid fa-sparkles"></i> Bridal Makeup</span>
+              <span class="badge"><i class="fa-solid fa-wand-magic-sparkles"></i> Hair Styling</span>
+              <span class="badge"><i class="fa-solid fa-location-dot"></i> On-location</span>
+            </div>
+
+            <h1>Bridal Beauty,<br />Artfully Crafted</h1>
+            <p>
+              Timeless, photo-ready glam for brides who want elegance—not heaviness.
+              Serving Telangana & Andhra Pradesh, with destination weddings across South India.
+            </p>
+
+            <div class="cta-row">
+              <a
+                class="btn btn-primary"
+                href="https://wa.me/919347738249?text=Hi%20S%20Vandana,%20I'm%20interested%20in%20booking%20a%20bridal%20trial"
+                target="_blank"
+                rel="noopener"
+              >
+                <i class="fa-brands fa-whatsapp"></i> Book Bridal Trial
+              </a>
+              <a class="btn btn-ghost" href="#portfolio">
+                <i class="fa-regular fa-images"></i> View Portfolio
+              </a>
+            </div>
+          </div>
+
+          <div class="hero-side reveal">
+            <h3 class="serif">What you get</h3>
+            <p class="muted" style="margin-bottom: 1.1rem">
+              Calm process, premium products, flawless finish.
+            </p>
+
+            <div class="mini">
+              <div class="mini-row">
+                <i class="fa-solid fa-shield-heart"></i>
+                <div>
+                  <strong>Hygiene-first kit</strong>
+                  <div class="muted" style="font-size:0.92rem">Sanitized tools & skin-kind products.</div>
+                </div>
+              </div>
+              <div class="mini-row">
+                <i class="fa-solid fa-camera-retro"></i>
+                <div>
+                  <strong>Camera-ready</strong>
+                  <div class="muted" style="font-size:0.92rem">Long-wear finish for photos & events.</div>
+                </div>
+              </div>
+              <div class="mini-row">
+                <i class="fa-solid fa-face-smile"></i>
+                <div>
+                  <strong>Natural elegance</strong>
+                  <div class="muted" style="font-size:0.92rem">Enhance, don’t mask.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services" id="services">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="kicker"><span class="dot"></span> Services</div>
+          <h2>Luxury bridal services</h2>
+          <p class="muted" style="margin: 0.8rem auto 0; max-width: 70ch">
+            Tailored looks designed around your skin, outfit, jewelry and ceremony lighting.
+          </p>
+          <div class="line"></div>
+        </div>
+
+        <div class="grid services-grid">
+          <article class="card service-card col-4 reveal">
+  <img 
+    src="https://queensinstyle.com/assets/images/blogs/IMG_9106-min.jpg" 
+    alt="Bridal makeup with soft sculpt and luminous finish" 
+    class="service-img"
+  />
+
+  <h3>Bridal Makeup</h3>
+  <p>Premium base, soft sculpt, luminous finish—built to last through rituals and photos.</p>
+
+  <div class="service-meta">
+    <span class="price">From ₹15,000</span>
+    <span class="tag"><i class="fa-solid fa-sparkles"></i> Best seller</span>
+  </div>
+</article>
+
+
+          <article class="card service-card col-4 reveal">
+  <img 
+    src="https://www.elegantweddinginvites.com/wedding-blog/wp-content/uploads/2015/07/elegant-curly-wedding-hairstyle-for-any-weddings.jpg" 
+    alt="Elegant bridal hair styling with bun and braids" 
+    class="service-img"
+  />
+
+  <h3>Bridal Hair Styling</h3>
+  <p>Elegant buns, braids, waves—crafted to match face shape, attire and hair volume.</p>
+
+  <div class="service-meta">
+    <span class="price">From ₹10,000</span>
+    <span class="tag"><i class="fa-solid fa-wand-magic-sparkles"></i> Custom</span>
+  </div>
+</article>
+
+<article class="card service-card col-4 reveal">
+  <img 
+    src="https://i.pinimg.com/736x/5c/ec/19/5cec199608f796e6de0ea5e08f3f7ae1.jpg" 
+    alt="Engagement and reception glam makeup look" 
+    class="service-img"
+  />
+
+  <h3>Engagement & Reception</h3>
+  <p>Glam that stays refined—balanced tradition with modern elegance for night events.</p>
+
+  <div class="service-meta">
+    <span class="price">From ₹12,000</span>
+    <span class="tag"><i class="fa-solid fa-star"></i> Popular</span>
+  </div>
+</article>
+
+
+          <article class="card service-card col-4 reveal">
+  <img 
+    src="https://i.pinimg.com/736x/0f/4b/e9/0f4be948ccada16edeb40a5686fc6471.jpg" 
+    alt="Professional saree draping and styling with accessories" 
+    class="service-img"
+  />
+
+  <h3>Saree Draping & Styling</h3>
+  <p>Traditional + modern drapes with accessory consultation for a cohesive look.</p>
+
+  <div class="service-meta">
+    <span class="price">From ₹5,000</span>
+    <span class="tag"><i class="fa-solid fa-gem"></i> Polished</span>
+  </div>
+</article>
+
+
+<article class="card service-card col-4 reveal">
+  <img 
+    src="https://static1.squarespace.com/static/5848d239f7e0ab2a69aeda20/58cb6081c534a5c4f2f01a9a/5997469a49fc2bbe8e36f8d8/1715205837466/1000x667-desti-guide-to-destination-weddings-podcast-003-destination-wedding-makeup-basics-wedding-black-destination-bride-ivory-perkins-beauty-cover.png?format=1500w" 
+    alt="On-location bridal makeup service at wedding venue" 
+    class="service-img"
+  />
+
+  <h3>On-Location Bridal Service</h3>
+  <p>Full kit at your venue. Trial + day-of prep + touch-ups for seamless continuity.</p>
+
+  <div class="service-meta">
+    <span class="price">Custom Quote</span>
+    <span class="tag"><i class="fa-solid fa-location-dot"></i> Travel</span>
+  </div>
+</article>
+
+<article class="card service-card col-4 reveal">
+  <img 
+    src="https://images.squarespace-cdn.com/content/v1/5a9ee2ec70e8023a569f383b/106c06fa-82d9-4331-999c-04e4417c93b0/SimpleBeautyArtistry-159764-Bridesmaid-Hair-Makeup-Blogbanner1.jpg" 
+    alt="Family and bridal party makeup and hair styling" 
+    class="service-img"
+  />
+
+  <h3>Family & Bridal Party</h3>
+  <p>Makeup + hair for mothers, sisters, bridesmaids—harmonized, camera-friendly.</p>
+
+  <div class="service-meta">
+    <span class="price">From ₹7,000</span>
+    <span class="tag"><i class="fa-solid fa-people-group"></i> Group</span>
+  </div>
+</article>
+
+        </div>
+      </div>
+    </section>
+
+<!-- Portfolio -->
+<section class="portfolio" id="portfolio">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="kicker"><span class="dot"></span> Portfolio</div>
+      <h2>Work that photographs beautifully</h2>
+      <p class="muted portfolio-subhead">
+        Tap any image to view larger. Subtle, elegant looks that still read on camera.
+      </p>
+      <div class="line"></div>
+    </div>
+
+    <div class="grid portfolio-grid" id="portfolioGrid">
+
+      <!-- 1 -->
+
+      <figure
+  class="work reveal"
+  data-full="https://tse1.explicit.bing.net/th/id/OIP.faXzYcNx8NgClQkzWqWhHQHaLH?rs=1&pid=ImgDetMain&o=7&rm=3"
+  data-caption="Bridal base + soft sculpt (long-wear)"
+  tabindex="0"
+  role="button"
+  aria-label="Open portfolio image: Bridal base and soft sculpt"
+>
+  <img
+    src="https://tse1.explicit.bing.net/th/id/OIP.faXzYcNx8NgClQkzWqWhHQHaLH?rs=1&pid=ImgDetMain&o=7&rm=3"
+    alt="Makeup artist applying bridal makeup"
+    loading="lazy"
+    decoding="async"
+  />
+  <figcaption class="caption">
+    <div class="serif caption-title">Soft glam</div>
+    <div class="small caption-sub">Luminous base • Photo-ready</div>
+    <span class="caption-pill" aria-hidden="true">Makeup</span>
+  </figcaption>
+</figure>
+
+      <!-- 2 -->
+      <figure
+        class="work reveal"
+        data-full="https://i.pinimg.com/originals/1b/84/d0/1b84d03f54f0eb44ad686c9b8aa2de14.jpg"
+        data-caption="Traditional bridal elegance (jewelry + veil)"
+        tabindex="0"
+        role="button"
+        aria-label="Open portfolio image: Traditional bridal elegance"
+      >
+        <img
+          src="https://i.pinimg.com/originals/1b/84/d0/1b84d03f54f0eb44ad686c9b8aa2de14.jpg"
+          srcset="
+            https://i.pinimg.com/originals/1b/84/d0/1b84d03f54f0eb44ad686c9b8aa2de14.jpg,
+            https://images.unsplash.com/photo-1697119866738-2f4b8f3b0d7b?auto=format&fit=crop&w=900&q=80 900w,
+            https://images.unsplash.com/photo-1697119866738-2f4b8f3b0d7b?auto=format&fit=crop&w=1200&q=80 1200w
+          "
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          alt="Bride in traditional Indian wedding attire and jewelry"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="caption">
+          <div class="serif caption-title">Traditional bride</div>
+          <div class="small caption-sub">Classic • Timeless</div>
+          <span class="caption-pill" aria-hidden="true">Bridal</span>
+        </figcaption>
+      </figure>
+
+      <!-- 3 -->
+      <figure
+        class="work reveal"
+        data-full="https://th.bing.com/th/id/R.222a2bf900ee544cebb216dfcb50f33f?rik=bTtHk4SpJhxjhg&riu=http%3a%2f%2findiacsr.in%2fwp-content%2fuploads%2f2022%2f10%2fMake-Hair-Sections-According-to-the-Hair-Density.jpg&ehk=blW5EuO2IWfkPDar9csWSlfdzw0ypklVkKtoFW9fW5c%3d&risl=&pid=ImgRaw&r=0"
+        data-caption="Hair styling detail (braids + finish)"
+        tabindex="0"
+        role="button"
+        aria-label="Open portfolio image: Hair styling detail"
+      >
+        <img
+          src="https://th.bing.com/th/id/R.222a2bf900ee544cebb216dfcb50f33f?rik=bTtHk4SpJhxjhg&riu=http%3a%2f%2findiacsr.in%2fwp-content%2fuploads%2f2022%2f10%2fMake-Hair-Sections-According-to-the-Hair-Density.jpg&ehk=blW5EuO2IWfkPDar9csWSlfdzw0ypklVkKtoFW9fW5c%3d&risl=&pid=ImgRaw&r=0"
+          srcset="
+            https://th.bing.com/th/id/R.222a2bf900ee544cebb216dfcb50f33f?rik=bTtHk4SpJhxjhg&riu=http%3a%2f%2findiacsr.in%2fwp-content%2fuploads%2f2022%2f10%2fMake-Hair-Sections-According-to-the-Hair-Density.jpg&ehk=blW5EuO2IWfkPDar9csWSlfdzw0ypklVkKtoFW9fW5c%3d&risl=&pid=ImgRaw&r=0,
+            https://images.unsplash.com/photo-1579027986290-1bc3c3b1e9bb?auto=format&fit=crop&w=900&q=80 900w,
+            https://images.unsplash.com/photo-1579027986290-1bc3c3b1e9bb?auto=format&fit=crop&w=1200&q=80 1200w
+          "
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          alt="Close-up of braided hair styling"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="caption">
+          <div class="serif caption-title">Hair details</div>
+          <div class="small caption-sub">Finish • Precision</div>
+          <span class="caption-pill" aria-hidden="true">Hair</span>
+        </figcaption>
+      </figure>
+
+      <!-- 4 -->
+      <figure
+        class="work reveal"
+        data-full="https://i.pinimg.com/originals/e1/0f/d2/e10fd2ea55d432901406a1cf4d12030a.jpg"
+        data-caption="Traditional jewelry + refined bridal makeup"
+        tabindex="0"
+        role="button"
+        aria-label="Open portfolio image: Bridal jewelry and refined makeup"
+      >
+        <img
+          src="https://i.pinimg.com/originals/e1/0f/d2/e10fd2ea55d432901406a1cf4d12030a.jpg"
+          srcset="
+            https://i.pinimg.com/originals/e1/0f/d2/e10fd2ea55d432901406a1cf4d12030a.jpg,
+            https://images.unsplash.com/photo-1711344626121-08f3d5a63a8f?auto=format&fit=crop&w=900&q=80 900w,
+            https://images.unsplash.com/photo-1711344626121-08f3d5a63a8f?auto=format&fit=crop&w=1200&q=80 1200w
+          "
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          alt="Portrait of a bride wearing traditional Indian jewelry"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="caption">
+          <div class="serif caption-title">Jewelry focus</div>
+          <div class="small caption-sub">Detail • Elegance</div>
+          <span class="caption-pill" aria-hidden="true">Portrait</span>
+        </figcaption>
+      </figure>
+
+      <!-- 5 -->
+      <figure
+        class="work reveal"
+        data-full="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRc_smyNs_UV4HeYyACXxVAxk3gmitR4NCEA&s"
+        data-caption="Bridal prep moment (brushwork + calm lighting)"
+        tabindex="0"
+        role="button"
+        aria-label="Open portfolio image: Bridal prep moment"
+      >
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRc_smyNs_UV4HeYyACXxVAxk3gmitR4NCEA&s"
+          srcset="
+            https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRc_smyNs_UV4HeYyACXxVAxk3gmitR4NCEA&s,
+            https://images.unsplash.com/photo-1703284360185-3f9c1f7f3a2e?auto=format&fit=crop&w=900&q=80 900w,
+            https://images.unsplash.com/photo-1703284360185-3f9c1f7f3a2e?auto=format&fit=crop&w=1200&q=80 1200w
+          "
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          alt="Bride getting makeup applied by a makeup artist"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="caption">
+          <div class="serif caption-title">Bridal prep</div>
+          <div class="small caption-sub">Calm • Controlled</div>
+          <span class="caption-pill" aria-hidden="true">Prep</span>
+        </figcaption>
+      </figure>
+
+      <!-- 6 -->
+      <figure
+        class="work reveal"
+        data-full="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBZAqKPmoqcshMy9nVDE3-3PcPUZOrGMLqow&s"
+        data-caption="On-location setup (hotel/venue ready)"
+        tabindex="0"
+        role="button"
+        aria-label="Open portfolio image: On-location setup"
+      >
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBZAqKPmoqcshMy9nVDE3-3PcPUZOrGMLqow&s"
+          srcset="
+            https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBZAqKPmoqcshMy9nVDE3-3PcPUZOrGMLqow&s,
+            https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBZAqKPmoqcshMy9nVDE3-3PcPUZOrGMLqow&s,
+            https://images.unsplash.com/photo-1711395972219-4d5d8c5bb9b7?auto=format&fit=crop&w=1200&q=80 1200w
+          "
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          alt="On-location bridal makeup in a hotel room setting"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="caption">
+          <div class="serif caption-title">On-location</div>
+          <div class="small caption-sub">Venue • Touch-ups</div>
+          <span class="caption-pill" aria-hidden="true">Travel</span>
+        </figcaption>
+      </figure>
+
+      <!-- 7 -->
+      <figure
+        class="work reveal"
+        data-full="https://tse3.mm.bing.net/th/id/OIP.4lI_tD3pNftW3KVhd8gs_wHaNK?w=218&h=387&c=7&o=5&pid=1.20"
+        data-caption="Bridal bangles + soft glam (reception-ready)"
+        tabindex="0"
+        role="button"
+        aria-label="Open portfolio image: Bridal bangles and soft glam"
+      >
+        <img
+          src="https://tse3.mm.bing.net/th/id/OIP.4lI_tD3pNftW3KVhd8gs_wHaNK?w=218&h=387&c=7&o=5&pid=1.20"
+          srcset="
+            https://tse3.mm.bing.net/th/id/OIP.4lI_tD3pNftW3KVhd8gs_wHaNK?w=218&h=387&c=7&o=5&pid=1.20,
+            https://images.unsplash.com/photo-1704541559052-33d6c8b1e2e3?auto=format&fit=crop&w=900&q=80 900w,
+            https://images.unsplash.com/photo-1704541559052-33d6c8b1e2e3?auto=format&fit=crop&w=1200&q=80 1200w
+          "
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          alt="Bride in pink wedding attire with bangles"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="caption">
+          <div class="serif caption-title">Reception glam</div>
+          <div class="small caption-sub">Defined • Long-wear</div>
+          <span class="caption-pill" aria-hidden="true">Evening</span>
+        </figcaption>
+      </figure>
+
+      <!-- 8 -->
+      <figure
+        class="work reveal"
+        data-full="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAxCdbAopwwEcx8R-1uwqW94TfaeNOZgr6uA&s"
+        data-caption="Bridal trial session (skin prep + tones)"
+        tabindex="0"
+        role="button"
+        aria-label="Open portfolio image: Bridal trial session"
+      >
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAxCdbAopwwEcx8R-1uwqW94TfaeNOZgr6uA&s"
+          srcset="
+            https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAxCdbAopwwEcx8R-1uwqW94TfaeNOZgr6uA&s,
+            https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAxCdbAopwwEcx8R-1uwqW94TfaeNOZgr6uA&s,
+            https://images.unsplash.com/photo-1712875552711-48a4b22c7d8d?auto=format&fit=crop&w=1200&q=80 1200w
+          "
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          alt="Bride having makeup applied during a trial session"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="caption">
+          <div class="serif caption-title">Bridal trial</div>
+          <div class="small caption-sub">Consult • Skin prep</div>
+          <span class="caption-pill" aria-hidden="true">Trial</span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+
+    <!-- Lightbox Modal -->
+    <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-label="Image viewer">
+      <div class="modal-inner">
+        <button class="modal-close" id="modalClose" aria-label="Close image viewer">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <button class="modal-prev" id="modalPrev" aria-label="Previous image">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button class="modal-next" id="modalNext" aria-label="Next image">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        <img class="modal-img" id="modalImg" src="" alt="" />
+        <div class="modal-caption" id="modalCaption"></div>
+      </div>
+    </div>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="kicker"><span class="dot"></span> Testimonials</div>
+          <h2>Brides remember the calm</h2>
+          <p class="muted" style="margin: 0.8rem auto 0; max-width: 70ch">
+            Bridal glam isn’t only about looks—it's about how relaxed you feel while getting ready.
+          </p>
+          <div class="line"></div>
+        </div>
+
+        <div class="grid testimonials-grid">
+          <article class="card quote reveal">
+            <p><em>Vandana gave me the exact elegant, natural look I dreamed of. She made the whole morning feel calm and smooth.</em></p>
+            <div class="who">
+              <strong>Priya Reddy</strong>
+              <span class="muted">Hyderabad, Telangana</span>
+            </div>
+          </article>
+
+          <article class="card quote reveal">
+            <p><em>Her attention to detail is phenomenal. Hair held perfectly through dancing and the makeup stayed flawless.</em></p>
+            <div class="who">
+              <strong>Anjali Sharma</strong>
+              <span class="muted">Kothagudem, Telangana</span>
+            </div>
+          </article>
+
+          <article class="card quote reveal">
+            <p><em>Professional, punctual, and truly an artist. She understood my vision and executed it beautifully.</em></p>
+            <div class="who">
+              <strong>Sofia Khan</strong>
+              <span class="muted">Vijayawada, Andhra Pradesh</span>
+            </div>
+          </article>
+        </div>
+      </div>
+      <figcaption class="caption">
+  <div class="serif" style="font-size:1.25rem">Beauty portrait</div>
+  <div class="small">Tone • Texture</div>
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="kicker">
+        <span class="dot"></span> Testimonials
+      </div>
+      <h2>Brides remember the calm</h2>
+      <p class="muted" style="margin: 0.8rem auto 0; max-width: 70ch">
+        Bridal glam isn't only about looks—it's about how relaxed you feel while getting ready.
+      </p>
+      <div class="line"></div>
+    </div>
+
+    <div class="grid testimonials-grid">
+      <article class="card quote reveal">
+        <p>
+          <em>
+            Vandana gave me the exact elegant, natural look I dreamed of. She made the whole morning feel calm and smooth.
+          </em>
+        </p>
+        <div class="who">
+          <strong>Priya Reddy</strong>
+          <span class="muted">Hyderabad, Telangana</span>
+        </div>
+      </article>
+
+      text
+
+      <article class="card quote reveal">
+        <p>
+          <em>
+            Her attention to detail is phenomenal. Hair held perfectly through dancing and the makeup stayed flawless.
+          </em>
+        </p>
+        <div class="who">
+          <strong>Anjali Sharma</strong>
+          <span class="muted">Kothagudem, Telangana</span>
+        </div>
+      </article>
+
+      <article class="card quote reveal">
+        <p>
+          <em>
+            Professional, punctual, and truly an artist. She understood my vision and executed it beautifully.
+          </em>
+        </p>
+        <div class="who">
+          <strong>Sofia Khan</strong>
+          <span class="muted">Vijayawada, Andhra Pradesh</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-photo reveal">
+        <img
+          src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=1000&q=80"
+          alt="S Vandana at work with a bride"
+          loading="lazy"
+        >
+      </div>
+
+      <div class="about-card card reveal">
+        <div class="section-head" style="text-align: left; margin-bottom: 1.8rem;">
+          <div class="kicker">
+            <span class="dot"></span> The Artist
+          </div>
+          <h2 style="text-align: left;">S Vandana Sv</h2>
+          <div class="line" style="margin: 1rem 0;"></div>
+        </div>
+
+        <p>
+          With over eight years of experience, I specialize in creating timeless,
+          camera-ready bridal beauty that feels authentically you.
+        </p>
+        <p>
+          My approach blends meticulous skin preparation with premium products and
+          techniques that last through every ritual and celebration.
+        </p>
+        <p>
+          I believe your wedding morning should be calm and luxurious. That's why
+          I bring a complete on-location kit, hygienic practices, and a steady,
+          reassuring presence.
+        </p>
+
+        text
+
+        <div class="areas">
+          <div class="muted" style="font-size:0.95rem; margin-bottom:0.5rem">
+            Service Areas
+          </div>
+          <div class="pill-row">
+            <span class="pill">Palvancha</span>
+            <span class="pill">Kothagudem (Ktdm)</span>
+            <span class="pill">Telangana</span>
+            <span class="pill">Andhra Pradesh</span>
+            <span class="pill">Destination Weddings</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="kicker">
+        <span class="dot"></span> Contact
+      </div>
+      <h2>Begin your bridal journey</h2>
+      <p class="muted" style="margin: 0.8rem auto 0; max-width: 70ch">
+        Let's discuss your wedding vision, timeline, and how we can create your perfect look.
+      </p>
+      <div class="line"></div>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-card card reveal">
+        <h3 style="margin-bottom:0.8rem;">Contact Details</h3>
+        <p class="muted" style="margin-bottom:1.2rem;">
+          Reach out directly for fastest response.
+        </p>
+
+        text
+
+        <div class="contact-list">
+          <a href="tel:+919347738249" class="contact-item">
+            <i class="fa-solid fa-phone"></i>
+            <div>
+              <strong>Call / WhatsApp</strong>
+              <div class="muted" style="font-size:0.92rem">+91 9347738249</div>
+            </div>
+          </a>
+
+          <a
+            href="https://instagram.com/glorys_gs"
+            target="_blank"
+            rel="noopener"
+            class="contact-item"
+          >
+            <i class="fa-brands fa-instagram"></i>
+            <div>
+              <strong>Instagram</strong>
+              <div class="muted" style="font-size:0.92rem">@glorys_gs</div>
+            </div>
+          </a>
+
+          <div
+            class="contact-item"
+            style="cursor:default; border-color:rgba(212,184,170,0.35); background:rgba(212,184,170,0.08);"
+          >
+            <i class="fa-solid fa-location-dot"></i>
+            <div>
+              <strong>Based in</strong>
+              <div class="muted" style="font-size:0.92rem">
+                Palvancha, Telangana
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a
+          href="https://wa.me/919347738249?text=Hi%20S%20Vandana,%20I%20found%20you%20through%20your%20website.%20I'd%20like%20to%20inquire%20about%20bridal%20services."
+          class="btn btn-primary"
+          style="width:100%; justify-content:center; margin-top:0.5rem;"
+          target="_blank"
+          rel="noopener"
+        >
+          <i class="fa-brands fa-whatsapp"></i> Message on WhatsApp
+        </a>
+      </div>
+
+      <div class="contact-card card reveal">
+        <h3 style="margin-bottom:0.8rem;">Send an Inquiry</h3>
+        <p class="muted" style="margin-bottom:1.2rem;">
+          I'll respond within 24 hours.
+        </p>
+
+        <form id="contactForm">
+          <div class="field">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required placeholder="Your name">
+          </div>
+
+          <div class="field">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" required placeholder="+91 12345 67890">
+          </div>
+
+          <div class="field">
+            <label for="date">
+              Wedding / Event Date <span class="muted">(Optional)</span>
+            </label>
+            <input type="date" id="date" name="date">
+          </div>
+
+          <div class="field">
+            <label for="location">Location / City</label>
+            <input
+              type="text"
+              id="location"
+              name="location"
+              required
+              placeholder="Where will the event be held?"
+            >
+          </div>
+
+          <div class="field">
+            <label for="message">Your Vision & Details</label>
+            <textarea
+              id="message"
+              name="message"
+              placeholder="Tell me about your wedding theme, outfit colors, skin type, or any specific requests..."
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">
+            <i class="fa-solid fa-paper-plane"></i> Send Inquiry
+          </button>
+
+          <div class="hint" style="text-align:center; margin-top:0.5rem;">
+            No spam. Your information is secure.
+          </div>
+        </form>
+
+        <div class="success" id="successMessage">
+          <p style="margin:0;">
+            <strong>Thank you!</strong> I've received your inquiry and will contact you shortly.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="logo serif" style="font-size:1.8rem;">Glorys GS</div>
+      <p style="max-width:50ch; text-align:center; margin:0.5rem 0 1rem;">
+        Bridal Makeup & Hair Styling by S Vandana Sv
+      </p>
+
+      text
+
+      <div class="footer-social">
+        <a href="https://instagram.com/glorys_gs" target="_blank" rel="noopener" aria-label="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://wa.me/919347738249" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="tel:+919347738249" aria-label="Call">
+          <i class="fa-solid fa-phone"></i>
+        </a>
+      </div>
+
+      <div class="copyright">
+        © <span id="currentYear"></span> Glorys GS. All rights reserved.
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to Top -->
+<button class="to-top" id="toTop" aria-label="Scroll to top">
+  <i class="fa-solid fa-chevron-up"></i>
+</button>
+
+<script>
+  // Set current year in footer
+  document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+  // Sticky header
+  const header = document.getElementById('header');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 80) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+
+  // Mobile drawer
+  const openDrawer = document.getElementById('openDrawer');
+  const closeDrawer = document.getElementById('closeDrawer');
+  const drawerOverlay = document.getElementById('drawerOverlay');
+  const drawer = document.getElementById('drawer');
+  const drawerLinks = document.querySelectorAll('.drawer-link');
+
+  openDrawer.addEventListener('click', () => {
+    document.body.classList.add('drawer-open');
+    drawer.setAttribute('aria-hidden', 'false');
+  });
+
+  closeDrawer.addEventListener('click', () => {
+    document.body.classList.remove('drawer-open');
+    drawer.setAttribute('aria-hidden', 'true');
+  });
+
+  drawerOverlay.addEventListener('click', () => {
+    document.body.classList.remove('drawer-open');
+    drawer.setAttribute('aria-hidden', 'true');
+  });
+
+  drawerLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      document.body.classList.remove('drawer-open');
+      drawer.setAttribute('aria-hidden', 'true');
+    });
+  });
+
+  // Back to top
+  const toTop = document.getElementById('toTop');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 500) {
+      toTop.classList.add('show');
+    } else {
+      toTop.classList.remove('show');
+    }
+  });
+
+  toTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Scroll reveal
+  const revealElements = document.querySelectorAll('.reveal');
+
+  const revealObserver = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    }
+  );
+
+  revealElements.forEach(el => {
+    revealObserver.observe(el);
+  });
+
+  // Lightbox
+  const modal = document.getElementById('modal');
+  const modalImg = document.getElementById('modalImg');
+  const modalCaption = document.getElementById('modalCaption');
+  const modalClose = document.getElementById('modalClose');
+  const modalPrev = document.getElementById('modalPrev');
+  const modalNext = document.getElementById('modalNext');
+  const works = document.querySelectorAll('.work');
+
+  let currentIndex = 0;
+  const workItems = Array.from(works);
+
+  function openLightbox(index) {
+    currentIndex = index;
+    const work = workItems[currentIndex];
+    modalImg.src = work.dataset.full;
+    modalCaption.textContent = work.dataset.caption;
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  function showPrev() {
+    currentIndex = (currentIndex - 1 + workItems.length) % workItems.length;
+    openLightbox(currentIndex);
+  }
+
+  function showNext() {
+    currentIndex = (currentIndex + 1) % workItems.length;
+    openLightbox(currentIndex);
+  }
+
+  works.forEach((work, index) => {
+    work.addEventListener('click', () => openLightbox(index));
+    work.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openLightbox(index);
+      }
+    });
+  });
+
+  modalClose.addEventListener('click', closeLightbox);
+  modalPrev.addEventListener('click', showPrev);
+  modalNext.addEventListener('click', showNext);
+
+  modal.addEventListener('click', e => {
+    if (e.target === modal) closeLightbox();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (!modal.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') showPrev();
+    if (e.key === 'ArrowRight') showNext();
+  });
+
+  // Contact form
+  const contactForm = document.getElementById('contactForm');
+  const successMessage = document.getElementById('successMessage');
+
+  contactForm.addEventListener('submit', e => {
+    e.preventDefault();
+
+    const phone = document.getElementById('phone').value;
+    if (phone && !/^[\d\s\+\-\(\)]{10,}$/.test(phone)) {
+      alert('Please enter a valid phone number');
+      return;
+    }
+
+    successMessage.style.display = 'block';
+    contactForm.reset();
+
+    setTimeout(() => {
+      successMessage.style.display = 'none';
+    }, 5000);
+  });
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    if (anchor.getAttribute('href') === '#') return;
+
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      const targetElement = document.querySelector(targetId);
+
+      if (targetElement) {
+        const headerHeight = header.offsetHeight;
+        const targetPosition = targetElement.offsetTop - headerHeight - 20;
+
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+  // Initialize date input
+  const dateInput = document.getElementById('date');
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  dateInput.min = tomorrow.toISOString().split('T')[0];
+</script>
+</body>
+</html>
+
